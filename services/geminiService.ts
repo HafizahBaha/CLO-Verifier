@@ -3,9 +3,9 @@ import { GoogleGenAI, Type } from "@google/genai";
 import { AnalysisResult, Year, Domain, Plo } from '../types';
 import { YEAR_PROGRESSION, BLOOM_TAXONOMY_DATA, SOFT_SKILLS_DATA, PLO_DATA, SOFT_SKILL_PROGRESSION } from '../constants';
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-
 export async function analyzeCLO(clo: string, year: Year, targetPlos: string): Promise<AnalysisResult> {
+  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+
   const prompt = `
     You are an expert in curriculum design based on MQF 2nd Edition Bloom Taxonomy, Soft Skills, and Programme Learning Outcome (PLO) Mapping for undergraduate studies.
     Your task is to provide a comprehensive analysis of a given Course Learning Outcome (CLO).
