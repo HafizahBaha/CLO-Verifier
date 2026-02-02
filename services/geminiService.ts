@@ -3,7 +3,6 @@ import { AnalysisResult, Year, Domain, Plo } from '../types';
 import { YEAR_PROGRESSION, BLOOM_TAXONOMY_DATA, SOFT_SKILLS_DATA, PLO_DATA, SOFT_SKILL_PROGRESSION } from '../constants';
 
 export async function analyzeCLO(clo: string, year: Year, targetPlos: string): Promise<AnalysisResult> {
-  // FIX: Initialize GoogleGenAI with API key from environment variable as per guidelines.
   const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
   const prompt = `
@@ -86,7 +85,7 @@ export async function analyzeCLO(clo: string, year: Year, targetPlos: string): P
     type: Type.OBJECT,
     properties: {
       identifiedVerbs: { type: Type.ARRAY, items: { type: Type.STRING } },
-      identifiedDomain: { type: Type.STRING, enum: [Domain.Cognitive, Domain.Affective, Domain.Psychomotor] },
+      identifiedDomain: { type: Type.STRING, description: `The identified Bloom's Taxonomy domain. Must be one of 'Cognitive', 'Affective', or 'Psychomotor'.` },
       identifiedLevel: {
         type: Type.OBJECT,
         properties: {
@@ -103,7 +102,7 @@ export async function analyzeCLO(clo: string, year: Year, targetPlos: string): P
         items: {
             type: Type.OBJECT,
             properties: {
-                code: { type: Type.STRING, enum: ['PLO1', 'PLO2', 'PLO3', 'PLO4', 'PLO5', 'PLO6'] },
+                code: { type: Type.STRING, description: "The PLO code being analyzed, e.g., 'PLO1'." },
                 isAligned: { type: Type.BOOLEAN },
                 justification: { type: Type.STRING }
             },
@@ -116,7 +115,7 @@ export async function analyzeCLO(clo: string, year: Year, targetPlos: string): P
         items: {
             type: Type.OBJECT,
             properties: {
-                suggestedPlo: { type: Type.STRING, enum: ['PLO1', 'PLO2', 'PLO3', 'PLO4', 'PLO5', 'PLO6'] },
+                suggestedPlo: { type: Type.STRING, description: "The suggested PLO code, e.g., 'PLO2'." },
                 justification: { type: Type.STRING }
             },
             required: ['suggestedPlo', 'justification']
