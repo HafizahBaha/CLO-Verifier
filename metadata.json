@@ -1,0 +1,5 @@
+{
+  "name": "CLO Verifier",
+  "description": "An application to assist curriculum review committees in verifying that Course Learning Outcomes (CLOs) align with MQF 2nd Edition Bloom's Taxonomy guidelines for undergraduate studies.",
+  "requestFramePermissions": []
+}
