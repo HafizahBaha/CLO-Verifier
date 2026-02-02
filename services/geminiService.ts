@@ -1,9 +1,9 @@
-
 import { GoogleGenAI, Type } from "@google/genai";
 import { AnalysisResult, Year, Domain, Plo } from '../types';
 import { YEAR_PROGRESSION, BLOOM_TAXONOMY_DATA, SOFT_SKILLS_DATA, PLO_DATA, SOFT_SKILL_PROGRESSION } from '../constants';
 
 export async function analyzeCLO(clo: string, year: Year, targetPlos: string): Promise<AnalysisResult> {
+  // FIX: API key must be read from process.env.API_KEY
   const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
   const prompt = `
